@@ -1,0 +1,27 @@
+services:
+  sonarqube:
+    image: sonarqube:community
+    container_name: sebas_sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - ../../data/sonarqube/conf:/opt/sonarqube/conf
+      - ../../data/sonarqube/extensions:/opt/sonarqube/extensions
+      - ../../data/sonarqube/data:/opt/sonarqube/data
+      - ../../data/sonarqube/logs:/opt/sonarqube/logs
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: sebas_jenkins
+    restart: unless-stopped
+    user: root
+    environment:
+      JAVA_OPTS: "-Duser.language=en -Duser.country=US"
+    ports:
+      - "8100:8080"
+      - "50000:50000"
+    volumes:
+      - ../../data/jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -1,0 +1,20 @@
+services:
+  redis:
+    image: redis
+    container_name: sebas_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ../../data/redis:/data
+
+  mariadb:
+    image: mariadb:10.3
+    container_name: sebas_mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "4306:3306"
+    volumes:
+      - ../../data/mysql:/var/lib/mysql

@@ -1,0 +1,31 @@
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.29.0
+    container_name: sebas_weaviate
+    ports:
+      - 17170:8080
+      - 17172:50051
+    volumes:
+      - ../../data/weaviate:/var/lib/weaviate
+    restart: on-failure:0
+    environment:
+      AUTHENTICATION_APIKEY_ENABLED: "true"
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: "${AUTHENTICATION_APIKEY_ALLOWED_KEYS}"
+      AUTHENTICATION_APIKEY_USERS: "${AUTHENTICATION_APIKEY_USERS}"
+      PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+      CLUSTER_HOSTNAME: "node1"
+      QUERY_DEFAULTS_LIMIT: "25"
+      ENABLE_MODULES: "text2vec-openai"
+      ENABLE_API_BASED_MODULES: "true"
+      DEFAULT_VECTORIZER_MODULE: "text2vec-openai"
+      TEXT2VEC_OPENAI_MODEL: "text-embedding-3-small"
+      CLUSTER_CONSISTENCY_LEVEL: "ONE"
+      ENABLE_CLUSTER: "false"
+      GRPC_ENABLED: "true"
+    command:
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8080"
+      - --scheme
+      - http
