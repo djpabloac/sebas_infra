@@ -10,6 +10,8 @@ services:
   mysqldb:
     image: mysql:8.0.36
     container_name: sebas_mysqldb
+    mem_limit: 1536m
+    memswap_limit: 2g
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQLDB_USER}
