@@ -16,7 +16,7 @@ This directory compose holds several docker-compose environments, organized by f
   - *Weaviate*: Vector search engine for AI/semantic search
 
 - **queue/**
-  - *RabbitMQ*: Message broker queue with admin interface
+  - *RabbitMQ 4.3.0 (Erlang 27.3.4.11)*: Message broker queue with admin interface, aligned with staging/prod
 
 - **search/**
   - *Elasticsearch*: Search and analytics engine
